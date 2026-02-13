@@ -1,0 +1,696 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-red: #ff1744;
+    --dark-bg: #0a0a0a;
+    --gold: #ffd700;
+    --light-text: #ffffff;
+    --text-gray: #b0b0b0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    overflow-x: hidden;
+    direction: rtl;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* الخلفية المتحركة */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.1;
+    animation: float 15s infinite ease-in-out;
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.heart::before {
+    content: "❤️";
+}
+
+.heart:nth-child(1) {
+    left: 10%;
+    top: 20%;
+    animation-delay: 0s;
+    animation-duration: 20s;
+}
+
+.heart:nth-child(2) {
+    right: 15%;
+    top: 40%;
+    animation-delay: 2s;
+    animation-duration: 18s;
+}
+
+.heart:nth-child(3) {
+    left: 30%;
+    bottom: 20%;
+    animation-delay: 4s;
+    animation-duration: 22s;
+}
+
+.heart:nth-child(4) {
+    right: 25%;
+    top: 60%;
+    animation-delay: 6s;
+    animation-duration: 19s;
+}
+
+.heart:nth-child(5) {
+    left: 50%;
+    bottom: 30%;
+    animation-delay: 8s;
+    animation-duration: 21s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-50px);
+    }
+}
+
+/* شرائط الأفلام */
+.film-strip-top,
+.film-strip-bottom {
+    background: linear-gradient(to right, var(--gold) 0%, var(--primary-red) 50%, var(--gold) 100%);
+    height: 30px;
+    position: relative;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.film-strip-top::before,
+.film-strip-top::after,
+.film-strip-bottom::before,
+.film-strip-bottom::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.film-strip-top::before,
+.film-strip-bottom::before {
+    left: 20px;
+    top: 0;
+    box-shadow: inset -5px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.film-strip-top::after,
+.film-strip-bottom::after {
+    right: 20px;
+    top: 0;
+    box-shadow: inset 5px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    padding: 40px 20px;
+}
+
+/* القسم الرئيسي */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(255, 23, 68, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%);
+    border-radius: 20px;
+    margin-bottom: 60px;
+    border: 2px solid var(--primary-red);
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 23, 68, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 23, 68, 0.6);
+    }
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.star {
+    font-size: 30px;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.star:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.star:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.main-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.word {
+    display: inline-block;
+    animation: fadeInScale 1s ease-out forwards;
+    opacity: 0;
+}
+
+.word:nth-child(1) {
+    animation-delay: 0.2s;
+    color: var(--primary-red);
+}
+
+.word:nth-child(2) {
+    animation-delay: 0.4s;
+    color: var(--gold);
+}
+
+.word:nth-child(3) {
+    animation-delay: 0.6s;
+    color: var(--primary-red);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* عداد الأيام */
+.countdown {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(255, 23, 68, 0.1) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.countdown h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--gold);
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.time-unit {
+    background: linear-gradient(135deg, var(--primary-red) 0%, rgba(255, 23, 68, 0.7) 100%);
+    padding: 20px 25px;
+    border-radius: 10px;
+    min-width: 80px;
+    box-shadow: 0 4px 15px rgba(255, 23, 68, 0.3);
+}
+
+.time-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--light-text);
+}
+
+.time-unit p {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-top: 5px;
+}
+
+.separator {
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.countdown-text {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+}
+
+/* الرسالة */
+.letter {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 50px;
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+}
+
+.letter-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.letter h2 {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 30px;
+}
+
+.letter-content {
+    text-align: right;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--light-text);
+}
+
+.letter-content p {
+    margin-bottom: 20px;
+}
+
+.hearts-message {
+    font-size: 2rem;
+    margin-top: 30px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* قسم الفيديو */
+.video-section {
+    margin-bottom: 60px;
+}
+
+.video-section h2 {
+    font-size: 2rem;
+    color: var(--primary-red);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.video-container {
+    border: 3px solid var(--primary-red);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(255, 23, 68, 0.4);
+    margin-bottom: 20px;
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+.video-text {
+    text-align: center;
+    color: var(--text-gray);
+    font-size: 1.1rem;
+}
+
+/* الهدية */
+.gift {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.gift h2 {
+    font-size: 2rem;
+    color: var(--primary-red);
+    margin-bottom: 30px;
+}
+
+.gift-box {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 30px;
+    cursor: pointer;
+    position: relative;
+}
+
+.gift-box:hover {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+.gift-bottom {
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(135deg, var(--primary-red) 0%, rgba(255, 23, 68, 0.8) 100%);
+    border-radius: 5px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.gift-top {
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(135deg, #ff5c82 0%, var(--primary-red) 100%);
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.ribbon {
+    width: 3px;
+    height: 100%;
+    background: var(--gold);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.bow {
+    width: 30px;
+    height: 30px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+}
+
+.bow::before,
+.bow::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 15px;
+    background: var(--gold);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bow::before {
+    right: 100%;
+    margin-right: 5px;
+}
+
+.bow::after {
+    left: 100%;
+    margin-left: 5px;
+}
+
+.gift-text {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin-top: 20px;
+}
+
+.gift-message {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 23, 68, 0.1) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gift-message h3 {
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.gift-message p {
+    color: var(--light-text);
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* الموسيقى */
+.music {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(255, 23, 68, 0.1) 100%);
+    border: 2px solid var(--primary-red);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.music h2 {
+    font-size: 2rem;
+    color: var(--primary-red);
+    margin-bottom: 30px;
+}
+
+.audio-container {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.audio-container audio {
+    width: 100%;
+}
+
+.music-text {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+}
+
+/* رموز المحبة */
+.love-symbols {
+    margin-bottom: 60px;
+}
+
+.love-symbols h2 {
+    font-size: 2rem;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.symbol-card {
+    background: linear-gradient(135deg, rgba(255, 23, 68, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border: 2px solid var(--primary-red);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.symbol-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(255, 23, 68, 0.4);
+    border-color: var(--gold);
+}
+
+.symbol-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.symbol-card p {
+    color: var(--light-text);
+    font-size: 1rem;
+}
+
+/* الخلاصة */
+.finale {
+    background: linear-gradient(135deg, rgba(255, 23, 68, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+    border: 3px solid var(--gold);
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.finale h2 {
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    margin-bottom: 30px;
+}
+
+.finale-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--light-text);
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.final-hearts {
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* الاستجابة */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.3rem;
+    }
+
+    .timer {
+        gap: 10px;
+    }
+
+    .time-unit {
+        padding: 15px 15px;
+        min-width: 60px;
+    }
+
+    .time-value {
+        font-size: 1.8rem;
+    }
+
+    .separator {
+        font-size: 1.5rem;
+    }
+
+    .letter,
+    .countdown {
+        padding: 30px 20px;
+    }
+
+    .symbols-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .finale {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .timer {
+        gap: 5px;
+    }
+
+    .time-unit {
+        padding: 10px 10px;
+        min-width: 50px;
+    }
+
+    .time-value {
+        font-size: 1.3rem;
+    }
+
+    .separator {
+        font-size: 1rem;
+    }
+}
